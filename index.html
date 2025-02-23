@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>모바일 태극기</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.wrap {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			align-content: center;
+			justify-content: center;
+		}
+		.wrap svg {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<svg xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink"
+			viewBox="-72 -48 144 96">
+
+			<title>태극기</title>
+			<rect fill="#FFFFFF" x="-72" y="-48" width="144" height="96"/>
+			<g transform="rotate(33.69)">
+				<g id="태극">
+					<path d="M-24,0A24,24 0 0 1 24,0Z" fill="#CD313A"/>
+					<path d="M24,0A24,24 0 0 1 -24,0Z" fill="#004998"/>
+					<circle cx="-12" cy="0" r="12" fill="#CD313A" stroke-width="0"/>
+					<circle cx="12" cy="0" r="12" fill="#004998" stroke-width="0"/>
+				</g>
+				<path id="건" d="M-52,-12v24h4v-24Z m6,0v24h4v-24Z m6,0v24h4v-24Z" fill="#000000"/>
+				<path id="곤" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
+			</g>
+			<g transform="rotate(-33.69)">
+				<path id="리" d="M-52,-12v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z" fill="#000000"/>
+				<path id="감" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
+			</g>
+		</svg>
+	</div>
+</body>
+</html>
