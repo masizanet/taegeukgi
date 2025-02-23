@@ -1,113 +1,179 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>모바일 태극기</title>
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			-webkit-text-size-adjust: 100%;
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-		}
-		:fullscreen {
-			width: 100vw;
-			height: 100vh;
-			background: white;
-		}
-		.wrap {
-			width: 100vw;
-			height: 100vh;
-			display: flex;
-			align-content: center;
-			justify-content: center;
-		}
-		.wrap svg {
-			display: block;
-			width: 100%;
-			height: auto;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>모바일 태극기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: white;
+            -webkit-text-size-adjust: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        :fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: white;
+        }
+
+        :-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: white;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .wrap svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        #fullscreenBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: #004998;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        @media screen and (orientation: landscape) {
+            .wrap svg {
+                height: 90vh;
+            }
+        }
+    </style>
 </head>
 <body>
-	<div class="wrap">
-		<svg xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		viewBox="-72 -48 144 96">
+    <div class="wrap">
+        <svg xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="-72 -48 144 96">
+            <title>태극기</title>
+            <rect fill="#FFFFFF" x="-72" y="-48" width="144" height="96"/>
+            <g transform="rotate(33.69)">
+                <g id="태극">
+                    <path d="M-24,0A24,24 0 0 1 24,0Z" fill="#CD313A"/>
+                    <path d="M24,0A24,24 0 0 1 -24,0Z" fill="#004998"/>
+                    <circle cx="-12" cy="0" r="12" fill="#CD313A" stroke-width="0"/>
+                    <circle cx="12" cy="0" r="12" fill="#004998" stroke-width="0"/>
+                </g>
+                <path id="건" d="M-52,-12v24h4v-24Z m6,0v24h4v-24Z m6,0v24h4v-24Z" fill="#000000"/>
+                <path id="곤" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
+            </g>
+            <g transform="rotate(-33.69)">
+                <path id="리" d="M-52,-12v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z" fill="#000000"/>
+                <path id="감" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
+            </g>
+        </svg>
+    </div>
+    <script>
+        function goFullscreenLandscape() {
+            const element = document.documentElement;
+            
+            // 전체화면 진입 시도
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+            
+            // 약간의 지연 후 화면 회전 시도
+            setTimeout(() => {
+                try {
+                    if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock('landscape').catch((err) => {
+                            console.log('화면 회전 실패:', err);
+                            alert('화면을 수동으로 회전해주세요.');
+                        });
+                    } else if (screen.lockOrientation) {
+                        screen.lockOrientation('landscape');
+                    } else if (screen.mozLockOrientation) {
+                        screen.mozLockOrientation('landscape');
+                    } else if (screen.msLockOrientation) {
+                        screen.msLockOrientation('landscape');
+                    }
+                } catch (e) {
+                    console.log('화면 회전 오류:', e);
+                    alert('화면을 수동으로 회전해주세요.');
+                }
+            }, 100);
+        }
 
-		<title>태극기</title>
-		<rect fill="#FFFFFF" x="-72" y="-48" width="144" height="96"/>
-		<g transform="rotate(33.69)">
-			<g id="태극">
-				<path d="M-24,0A24,24 0 0 1 24,0Z" fill="#CD313A"/>
-				<path d="M24,0A24,24 0 0 1 -24,0Z" fill="#004998"/>
-				<circle cx="-12" cy="0" r="12" fill="#CD313A" stroke-width="0"/>
-				<circle cx="12" cy="0" r="12" fill="#004998" stroke-width="0"/>
-			</g>
-			<path id="건" d="M-52,-12v24h4v-24Z m6,0v24h4v-24Z m6,0v24h4v-24Z" fill="#000000"/>
-			<path id="곤" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z m6,-13v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
-		</g>
-		<g transform="rotate(-33.69)">
-			<path id="리" d="M-52,-12v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z" fill="#000000"/>
-			<path id="감" d="M36,-12v11h4v-11Z m0,13v11h4v-11Z m6,-13v24h4v-24Z m6,0v11h4v-11Z m0,13v11h4v-11Z" fill="#000000"/>
-		</g>
-	</svg>
-</div>
-<script>
-	// 가로모드 & 전체화면 전환 함수
-	function goFullscreenLandscape() {
-		// 전체화면 요청
-		const element = document.documentElement;
+        // 전체화면 이벤트 리스너
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
-		if (element.requestFullscreen) {
-			element.requestFullscreen();
-		} else if (element.webkitRequestFullscreen) {
-			element.webkitRequestFullscreen();
-		} else if (element.msRequestFullscreen) {
-			element.msRequestFullscreen();
-		}
+        function handleFullscreenChange() {
+            const btn = document.getElementById('fullscreenBtn');
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                btn.textContent = '전체화면 종료';
+                btn.onclick = exitFullscreen;
+            } else {
+                btn.textContent = '전체화면 시작';
+                btn.onclick = goFullscreenLandscape;
+            }
+        }
 
-		// 화면 방향 가로모드로 전환
-		if (screen.orientation && screen.orientation.lock) {
-			screen.orientation.lock('landscape')
-			.catch((err) => console.log('화면 회전 실패:', err));
-		} else if (screen.lockOrientation) {
-			screen.lockOrientation('landscape');
-		} else if (screen.mozLockOrientation) {
-			screen.mozLockOrientation('landscape');
-		} else if (screen.msLockOrientation) {
-			screen.msLockOrientation('landscape');
-		}
-	}
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
 
-	// 전체화면 종료 함수
-	function exitFullscreen() {
-		if (document.exitFullscreen) {
-			document.exitFullscreen();
-		} else if (document.webkitExitFullscreen) {
-			document.webkitExitFullscreen();
-		} else if (document.msExitFullscreen) {
-			document.msExitFullscreen();
-		}
-		// 화면 방향 잠금 해제
-		if (screen.orientation && screen.orientation.unlock) {
-			screen.orientation.unlock();
-		} else if (screen.unlockOrientation) {
-			screen.unlockOrientation();
-		} else if (screen.mozUnlockOrientation) {
-			screen.mozUnlockOrientation();
-		} else if (screen.msUnlockOrientation) {
-			screen.msUnlockOrientation();
-		}
-	}
+            if (screen.orientation && screen.orientation.unlock) {
+                screen.orientation.unlock();
+            } else if (screen.unlockOrientation) {
+                screen.unlockOrientation();
+            } else if (screen.mozUnlockOrientation) {
+                screen.mozUnlockOrientation();
+            } else if (screen.msUnlockOrientation) {
+                screen.msUnlockOrientation();
+            }
+        }
 
-	// HTML에서 사용 예시
-	const button = document.createElement('button');
-	button.textContent = '전체화면 전환';
-	button.addEventListener('click', goFullscreenLandscape);
-	document.body.appendChild(button);
-</script>
+        // 버튼 생성
+        const button = document.createElement('button');
+        button.id = 'fullscreenBtn';
+        button.textContent = '전체화면 시작';
+        button.addEventListener('click', goFullscreenLandscape);
+        document.body.appendChild(button);
+    </script>
 </body>
 </html>
