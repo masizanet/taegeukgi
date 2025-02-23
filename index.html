@@ -129,6 +129,21 @@
 	        }
 	    }
 	}
+    @supports (-webkit-touch-callout: none) {
+		.svg-container {
+				width: 90%;
+				max-width: 90vw;
+				max-height: 90vh;
+		}
+		
+		@media screen and (orientation: landscape) {
+				.svg-container {
+						width: auto;
+						height: 80vh;
+						aspect-ratio: 3/2;
+				}
+		}
+	}
     </style>
 </head>
 <body>
